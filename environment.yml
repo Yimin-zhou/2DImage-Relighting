@@ -1,0 +1,20 @@
+name: relighting
+
+channels:
+ - pytorch
+ - conda-forge
+ - defaults
+
+dependencies:
+  - Python
+  - PyTorch=1.4.0
+  - torchvision
+  - Pillow
+  - scikit-image
+  - tqdm
+  - numpy
+  - opencv
+  - trimesh
+  - PyOpenGL
+  - ffmpeg
+  - pycocotools=2.0.0
