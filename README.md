@@ -16,6 +16,8 @@
 High-Resolution 3D Human Digitization∗
  https://arxiv.org/pdf/2004.00452.pdf (some code and pre-trained models provided by the paper are used in our project)
  
+  - [ ] mask out unwanted parts
+  
   - [ ] calculate albedo map
 
   - [ ] handle HDR
