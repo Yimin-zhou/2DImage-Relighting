@@ -4,8 +4,8 @@
  1. Install `Anaconda` on your machine.
  2. In root directory run 
     `conda env create -f environment.yml` & `conda activate relighting`
- 3. Redirect to `src/` run `python3 main.py`
- 4. Redirect to `src/venders/` run `sh ./scripts/download_trained_model.sh` to download the pretrained model
+ 3. Redirect to `src/venders/` run `sh ./scripts/download_trained_model.sh` to download the pretrained model
+ 4. Redirect to `src/` run `python3 main.py`
  5. You will see output images inside folder `outputs`
  (Warning: this only works for full-body(human) photos)
  
