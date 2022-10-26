@@ -14,8 +14,9 @@
  The implementation steps are different from the paper.
  
 - Implementation(roughly 4-5 steps):
-  - [] Get depth map, then derive normal map from the depth https://pytorch.org/hub/intelisl_midas_v2/
-    (Alternative)- [X] calculate normal map, based on PIFuHD: Multi-Level Pixel-Aligned Implicit Function for
+  - [ ] Get depth map, then derive normal map from the depth https://pytorch.org/hub/intelisl_midas_v2/
+  - (Alternative)
+  - [X] calculate normal map, based on PIFuHD: Multi-Level Pixel-Aligned Implicit Function for
 High-Resolution 3D Human Digitization∗
  https://arxiv.org/pdf/2004.00452.pdf (some code and pre-trained models provided by the paper are used in our project)
  
