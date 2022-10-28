@@ -12,11 +12,11 @@
  ### About this project
  - The pipline is inspired by Total Relighting: Learning to Relight Portraits for Background Replacement https://augmentedperception.github.io/total_relighting/total_relighting_paper.pdf (Google, 2021)                                                                         
  The implementation steps are different from the paper.
- 
-- Implementation(roughly 4-5 steps):
-  - [ ] Get depth map, then derive normal map from the depth https://pytorch.org/hub/intelisl_midas_v2/
-  - (Alternative)
-  - [X] calculate normal map, based on PIFuHD: Multi-Level Pixel-Aligned Implicit Function for
+
+- The Pipeline: `Surface Normal` -> `Image Matting` -> `Albedo` -> `HDR filering` -> `Shading`
+  - [ ] (surfaceNormal method 1) Get normal map directly.
+  - [ ] (surfaceNormal method 2) Get depth map, then derive normal map from the depth https://pytorch.org/hub/intelisl_midas_v2/
+  - [X] (surfaceNormal method 3) calculate normal map, based on PIFuHD: Multi-Level Pixel-Aligned Implicit Function for
 High-Resolution 3D Human Digitization∗
  https://arxiv.org/pdf/2004.00452.pdf (some code and pre-trained models provided by the paper are used in our project)
  
