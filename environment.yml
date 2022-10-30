@@ -7,7 +7,7 @@ channels:
 
 dependencies:
   - Python
-  - PyTorch=1.4.0
+  - PyTorch>=1.10.0
   - torchvision
   - Pillow
   - scikit-image
@@ -17,4 +17,7 @@ dependencies:
   - trimesh
   - PyOpenGL
   - ffmpeg
-  - pycocotools=2.0.0
+  - pycocotools>=2.0.0
+  - timm
+  - gcc=12.1.0
+  - scipy # remove after implementing gaussian_filter
