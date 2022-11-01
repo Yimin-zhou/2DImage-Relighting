@@ -2,7 +2,7 @@ import numpy as np
 
 def calculate_diffuse(cub_maps, surface_normal, size):
     light = np.full_like(surface_normal, 0., dtype=float)
-    normal_coordinate = (surface_normal / 255.  + 0.5) * 2.
+    normal_coordinate = (surface_normal / 255.  + 0.5) * 2. # map normal back to -1 - 1
     # cubemap_names = ['px'0, 'nx'1, 'py'2, 'ny'3, 'pz'4, 'nz'5]
     for y in range(size):
         for x in range(size):

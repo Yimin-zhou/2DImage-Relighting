@@ -1,8 +1,29 @@
-import cv2
 import torch
 import numpy as np
 import math
 from vendors.depth_predict import face_depth
+
+# derive normal map from depth map
+def depth_to_normal(img, depth, size):
+    # TODO (Yimin) interpolate depth
+    normal = np.full_like(img, 0., dtype=float)
+    for y in range(size):
+        for x in range(size):
+            deltaX = 0.
+            deltaY = 0.
+            if (x + 3) < size and (x - 3) >= 0:
+                deltaX = (depth[y][x + 3] - depth[y][x - 3])
+
+            if (y + 3) < size and (y - 3) >= 0:
+                deltaY = (depth[y + 3][x] - depth[y - 3][x])
+            
+            n_dir = (-deltaX, -deltaY, 1.)
+            # normalized gradient
+            gradient = math.sqrt(n_dir[0]**2. + n_dir[1]**2. + n_dir[2]**2.)
+            # remap & normalize normal and map to 0-255
+            normal[y, x] = [(-deltaX / gradient / 2. + 0.5) * 255., (-deltaY / gradient / 2. + 0.5) * 255., (n_dir[2] / gradient / 2. + 0.5) * 255.]
+
+    return normal
 
 # get relative depth map
 def calculate_depth_relative(img):
@@ -31,7 +52,7 @@ def calculate_depth_relative(img):
         depth = prediction.cpu().numpy()
     return depth
 
-# a precise depth map for face
+# precise depth map for face
 def calculate_depth_face(img, size):
     model = face_depth.Model()
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
@@ -51,24 +72,3 @@ def calculate_depth_face(img, size):
     # return range from 0-1
     return depth
 
-# derive normal map from depth map
-def depth_to_normal(img, depth, size):
-    # TODO (Yimin) interpolate depth
-    normal = np.full_like(img, 0., dtype=float)
-    for y in range(size):
-        for x in range(size):
-            deltaX = 0.
-            deltaY = 0.
-            if (x + 3) < size:
-                deltaX = (depth[y][x + 3] - depth[y][x - 3])
-
-            if (y + 3) < size:
-                deltaY = (depth[y + 3][x] - depth[y - 3][x])
-            
-            n_dir = (-deltaX, -deltaY, 1.)
-            # normalized gradient
-            gradient = math.sqrt(n_dir[0]**2. + n_dir[1]**2. + n_dir[2]**2.)
-            # remap & normalize normal and map to 0-255
-            normal[y, x] = [(-deltaX / gradient / 2. + 0.5) * 255., (-deltaY / gradient / 2. + 0.5) * 255., (n_dir[2] / gradient / 2. + 0.5) * 255.]
-
-    return normal

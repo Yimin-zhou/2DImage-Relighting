@@ -16,7 +16,7 @@ dirname = os.path.dirname(os.path.abspath(__file__))
 output_image_dir= dirname + '/outputs/'
 input_image_path = dirname + '/inputs/'
 input_mask_path = dirname + '/inputs/'
-cube_map_path = dirname + '/inputs/cubemap/pink_sunrise/'
+cube_map_path = dirname + '/inputs/cubemap/red/'
 cube_out_path = dirname + '/outputs/cubemap/'
 cubemap_names = ['px', 'nx', 'py', 'ny', 'pz', 'nz']
 
@@ -24,34 +24,45 @@ img_szie = 1024
 input_img_name = 'input5.jpg'
 input_image = np.float32(Image.open(input_image_path + input_img_name))
 input_image_mask = cv2.imread(input_mask_path + 'mask_' + input_img_name, cv2.IMREAD_GRAYSCALE)
+input_image = resize(input_image, (img_szie, img_szie))
+input_image_mask = resize(input_image, (img_szie, img_szie))
+
 
 def main():
     ############################### Step 1 surface normal ########################################
     print("1. Calculating surface normal...")
-    # (surface normal method 1)
-    sobel_normal = calculate_normal_sobel(input_image)
+    # (Alternative surface normal method 1)
+    # calculate normal map 
+    sobel_normal = calculate_normal_sobel(input_image, img_szie)
+    sobel_normal_output = Image.fromarray(np.uint8(sobel_normal))
+    if sobel_normal_output.mode != 'RGB':
+        sobel_normal_output = sobel_normal_output.convert('RGB')
+    sobel_normal_output.save(output_image_dir + 'sobel_normal_' + input_img_name )
     
-    # (surface normal method 2)
-    # step 1.1 calculate depth map
+    # (Alternative surface normal method 2)
+    # step 1 calculate depth map
     # - get the depth map
     depth = calculate_depth_face(input_image, img_szie)
     # depth = calculate_depth_relative(input_image) # relative depth estimation
-    depth = resize(depth, (img_szie, img_szie))
+    depth = resize(depth, (img_szie, img_szie)) # have to resize depth again
     depth = np.multiply(depth, 255)
+    # depth = ndimage.gaussian_filter(depth, sigma=(5,5)) #TODO replace with our implemetation
     depth_output = Image.fromarray(depth)
     if depth_output.mode != 'RGB':
         depth_output = depth_output.convert('RGB')
     depth_output.save(output_image_dir + 'depth_' + input_img_name )
     # - derive normal map from depth map
-    surface_normal = depth_to_normal(input_image, depth, img_szie)
-    normal_output = Image.fromarray(np.uint8(surface_normal))
+    depth_normal = depth_to_normal(input_image, depth, img_szie)
+    normal_output = Image.fromarray(np.uint8(depth_normal))
     if normal_output.mode != 'RGB':
         normal_output = normal_output.convert('RGB')
     normal_output.save(output_image_dir + 'normal_' + input_img_name )
     
-    # (surface normal method 3)
-    # step 1.1 calculate normal map 
+    # (Alternative surface normal method 3)
+    # calculate normal map 
     # calculate_normal(input_image_path, (input_image_path + 'input1.jpg'), output_image_dir)
+    
+    surface_normal = depth_normal
     print("1. Done surface normal!")
     
     ############################### Step 2 albedo ########################################
