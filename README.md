@@ -14,8 +14,8 @@
  The implementation steps are different from the paper.
 
 - The Pipeline: `Surface Normal` -> `Image Matting` -> `Albedo` -> `HDR filering` -> `Shading`
-  - [ ] (surfaceNormal method 1) Get normal map directly.
-  - [ ] (surfaceNormal method 2) Get depth map, then derive normal map from the depth https://pytorch.org/hub/intelisl_midas_v2/
+  - [X] (surfaceNormal method 1) Get normal map directly (sobel). http://citebay.com/how-to-cite/sobel-filter/
+  - [X] (surfaceNormal method 2) Get face/relative depth map, then derive normal map from the depth https://pytorch.org/hub/intelisl_midas_v2/ & download model https://nuigalwayie-my.sharepoint.com/:u:/g/personal/f_khan4_nuigalway_ie/EepkuVajAhdIjZoQm5Weyx4BjXcEZy-uw5OWxxMXq1WJPA?e=rv3aSY & https://github.com/khan9048/Facial_depth_estimation & https://courses.cs.washington.edu/courses/cse590b/02au/hdrc.pdf
   - [X] (surfaceNormal method 3) calculate normal map, based on PIFuHD: Multi-Level Pixel-Aligned Implicit Function for
 High-Resolution 3D Human Digitization∗
  https://arxiv.org/pdf/2004.00452.pdf (some code and pre-trained models provided by the paper are used in our project)
@@ -24,7 +24,7 @@ High-Resolution 3D Human Digitization∗
   
   - [ ] calculate albedo map
 
-  - [ ] handle HDR
+  - [ ] handle HDR, TODO transform HDR to cube map. (Real Time Readering, 6.2.4)
 
   - [ ] shading & compositing
 
