@@ -1,0 +1,23 @@
+name: relighting
+
+channels:
+ - pytorch
+ - conda-forge
+ - defaults
+
+dependencies:
+  - Python
+  - PyTorch>=1.10.0
+  - torchvision
+  - Pillow
+  - scikit-image
+  - tqdm
+  - numpy
+  - opencv
+  - trimesh
+  - PyOpenGL
+  - ffmpeg
+  - pycocotools>=2.0.0
+  - timm
+  - gcc=12.1.0
+  - scipy # remove after implementing gaussian_filter
