@@ -19,13 +19,11 @@
   - [X] (surfaceNormal method 3) calculate normal map, based on PIFuHD: Multi-Level Pixel-Aligned Implicit Function for
 High-Resolution 3D Human Digitization∗
  https://arxiv.org/pdf/2004.00452.pdf (some code and pre-trained models provided by the paper are used in our project)
- 
-  - [ ] TODO MAYBE mask out unwanted parts (maybe add auto-extract function)
   
-  - [ ] TODO calculate albedo map
+  - [X] calculate albedo map
 
-  - [ ] handle HDR, (TODO transform HDR to cube map). (Real Time Readering, 6.2.4) https://www.researchgate.net/publication/3572571_An_adaptive_Gaussian_filter_for_noise_reduction_and_edge_detection
+  - [X] handle HDR, (transform HDR to cube map). (Real Time Readering, 6.2.4) https://www.researchgate.net/publication/3572571_An_adaptive_Gaussian_filter_for_noise_reduction_and_edge_detection
 
-  - [ ] shading & compositing (TODO specular)
+  - [X] shading & compositing
 
  - (Reminder: might need to change the order of some steps & mask normal map)
